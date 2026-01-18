@@ -1,0 +1,57 @@
+name: CI/CD - AIRCTRL
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov mypy pylint
+    
+    - name: Lint with pylint
+      run: |
+        pylint src/ --disable=C0111,R0903,R0913 --max-line-length=120 || true
+    
+    - name: Type check with mypy
+      run: |
+        mypy src/ --ignore-missing-imports || true
+    
+    - name: Run unit tests
+      run: |
+        pytest tests/ -v --cov=src --cov-report=term-missing
+    
+    - name: Verify imports
+      run: |
+        python -c "from src.emotion import EmotionLogic, Emotion; print('✓ Imports OK')"
+    
+    - name: Check config file
+      run: |
+        python -c "import yaml; yaml.safe_load(open('config.yaml')); print('✓ Config valid')"
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run Bandit security scan
+      run: |
+        pip install bandit
+        bandit -r src/ -ll || true

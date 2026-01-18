@@ -1,0 +1,19 @@
+# Example annotations for evaluation
+# Format: frame_id,ground_truth
+# 
+# To create your own:
+# 1. Take screenshots using the app (press S)
+# 2. Manually label each frame with true emotion
+# 3. Format as CSV with this schema
+
+frame_id,ground_truth
+airctrl_001,HAPPY
+airctrl_002,HAPPY
+airctrl_003,NEUTRAL
+airctrl_004,SAD
+airctrl_005,ANGRY
+airctrl_006,SURPRISED
+airctrl_007,FEAR
+airctrl_008,EXCITED
+airctrl_009,NEUTRAL
+airctrl_010,HAPPY

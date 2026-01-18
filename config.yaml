@@ -1,0 +1,51 @@
+# AIRCTRL Configuration File
+# All tunable parameters externalized for non-programmer tuning
+
+# Webcam Settings
+camera:
+  index: 0
+  width: 1280
+  height: 720
+  fps: 30
+
+# Face Detection Settings
+face_detection:
+  max_faces: 1  # Single-face for CPU efficiency
+  min_detection_confidence: 0.7
+  min_tracking_confidence: 0.7
+  draw_landmarks: false
+
+# Emotion Logic Thresholds
+emotion_thresholds:
+  mouth_open_happy: 0.015
+  mouth_open_excited: 0.035
+  mouth_open_surprised: 0.08
+  mouth_open_fear: 0.05
+  eye_open_neutral: 0.025
+  eye_open_excited: 0.032
+  eye_open_surprised: 0.04
+  eye_open_fear: 0.035
+  eye_open_angry: 0.018
+  brow_neutral_baseline: 0.05
+  brow_raise_surprised: 0.008
+  brow_raise_fear: 0.004
+  brow_furrow_angry: -0.01
+
+# Temporal Smoothing Settings
+smoothing:
+  smoothing_factor: 0.3  # EMA alpha (0=smooth, 1=responsive)
+  history_size: 100
+  confidence_threshold: 0.6
+  min_dwell_frames: 4  # Frames before emotion switch
+  cooldown_frames: 6  # Frames to wait after switch
+
+# UI Settings
+ui:
+  emoji_scale: 0.65
+  fps_light_mode_threshold: 15.0  # Switch to light HUD below this FPS
+  show_confidence_on_bbox: true
+
+# Logging Settings
+logging:
+  enabled: false
+  log_path: null  # null = auto-generate in logs/

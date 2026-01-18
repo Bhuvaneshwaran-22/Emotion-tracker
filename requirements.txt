@@ -1,0 +1,20 @@
+# AIRCTRL - AI Motion Control System
+# Python Package Requirements
+
+# Computer Vision
+opencv-python>=4.10.0
+
+# Hand Tracking & Pose Detection
+mediapipe>=0.10.30
+
+# Numerical Computing
+numpy>=1.26.0
+
+# Configuration Management
+PyYAML>=6.0
+
+# System Control (Day-5: Action Execution)
+pyautogui>=0.9.54  # Cross-platform GUI automation with failsafe
+
+# Additional utilities (for future expansion)
+# pynput==1.7.6      # For advanced keyboard/mouse control
